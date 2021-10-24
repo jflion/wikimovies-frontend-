@@ -1,0 +1,175 @@
+<div class="mx-auto mt-4">
+  <a href="" [routerLink]="['/home']" class="btn btn-info">Atras</a>
+  <h3>Registrar pelicula</h3>
+  <form [formGroup]="createForm" (ngSubmit)="handleSubmit(createForm.value)">
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            formControlName="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="overview"
+            formControlName="overview"
+            style="height: 20rem"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Imagen</label>
+          <input
+            type="text"
+            class="form-control"
+            name="imageUrl"
+            formControlName="imageUrl"
+          />
+          <br />
+          <div *ngIf="createForm.controls.imageUrl.value">
+            <img
+              [src]="createForm.controls.imageUrl.value"
+              alt="Movie"
+              style="height: 20rem; width: 15rem"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="popularity">Popularidad</label>
+          <input
+            type="text"
+            class="form-control"
+            name="popularity"
+            formControlName="popularity"
+          />
+        </div>
+        <div class="form-group">
+          <label for="duration">Duración</label>
+          <input
+            type="text"
+            class="form-control"
+            name="duration"
+            formControlName="duration"
+          />
+        </div>
+        <div class="form-group">
+          <button
+            class="btn btn-success btn-block"
+            [disabled]="!createForm.valid"
+          >
+            Registrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngFor="let validation of validationMessages.title">
+    <div
+      *ngIf="
+        createForm.controls['title'].invalid &&
+        (createForm.controls['title'].dirty ||
+          createForm.controls['title'].touched)
+      "
+    >
+      <div
+        *ngIf="
+          createForm.controls['title'].errors &&
+          createForm.controls['title'].hasError(validation.type)
+        "
+      >
+        <div class="alert alert-danger">{{ validation.message }}</div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.overview">
+      <div
+        *ngIf="
+          createForm.controls['overview'].invalid &&
+          (createForm.controls['overview'].dirty ||
+            createForm.controls['overview'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            createForm.controls['overview'].errors &&
+            createForm.controls['overview'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+      <div *ngFor="let validation of validationMessages.imageUrl">
+        <div
+          *ngIf="
+            createForm.controls['imageUrl'].invalid &&
+            (createForm.controls['imageUrl'].dirty ||
+              createForm.controls['imageUrl'].touched)
+          "
+        >
+          <div
+            *ngIf="
+              createForm.controls['imageUrl'].errors &&
+              createForm.controls['imageUrl'].hasError(validation.type)
+            "
+          >
+            <div class="alert alert-danger">{{ validation.message }}</div>
+          </div>
+        </div>
+        <div *ngFor="let validation of validationMessages.popularity">
+          <div
+            *ngIf="
+              createForm.controls['popularity'].invalid &&
+              (createForm.controls['popularity'].dirty ||
+                createForm.controls['popularity'].touched)
+            "
+          >
+            <div
+              *ngIf="
+                createForm.controls['popularity'].errors &&
+                createForm.controls['popularity'].hasError(validation.type)
+              "
+            >
+              <div class="alert alert-danger">{{ validation.message }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let validation of validationMessages.duration">
+          <div
+            *ngIf="
+              createForm.controls['duration'].invalid &&
+              (createForm.controls['duration'].dirty ||
+                createForm.controls['duration'].touched)
+            "
+          >
+            <div
+              *ngIf="
+                createForm.controls['duration'].errors &&
+                createForm.controls['duration'].hasError(validation.type)
+              "
+            >
+              <div class="alert alert-danger">{{ validation.message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalRegister let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">WikiMovies</h4>
+  </div>
+  <div class="modal-body">
+    <p><strong>😁 Felicitaciones!</strong></p>
+    <p>La pelicula se registró satisfactoriamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" (click)="modal.close()">Aceptar</button>
+  </div>
+</ng-template>

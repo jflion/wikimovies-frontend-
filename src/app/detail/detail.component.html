@@ -1,0 +1,39 @@
+<div class="mx-auto mt-4">
+  <a href="" [routerLink]="['/home']" class="btn btn-info">Atras</a>
+  <div class="row mt-4" *ngIf="movie">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img [src]="movie.imageUrl" alt="Movie" />
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Popularidad: {{ movie.popularity }}% <br />
+            Duración: {{ movie.duration }}
+          </h6>
+          <p class="card-text">{{ movie.overview }}...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4" *ngIf="!movie">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '285px',
+            height: '300px'
+          }"
+        ></ngx-skeleton-loader>
+        <div class="card-body">
+          <h5 class="card-title"><ngx-skeleton-loader></ngx-skeleton-loader></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <ngx-skeleton-loader></ngx-skeleton-loader> <br />
+            <ngx-skeleton-loader></ngx-skeleton-loader>
+          </h6>
+          <p class="card-text"><ngx-skeleton-loader></ngx-skeleton-loader></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

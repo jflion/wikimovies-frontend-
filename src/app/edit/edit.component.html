@@ -1,0 +1,176 @@
+<div class="mx-auto mt-4">
+  <a href="" [routerLink]="['/home']" class="btn btn-info">Atras</a>
+  <h3>Editar pelicula</h3>
+  <form [formGroup]="editForm" (ngSubmit)="handleSubmit(editForm.value)">
+    <div class="row mt-4" *ngIf="movie">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            formControlName="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea
+            type="text"
+            class="form-control"
+            name="overview"
+            formControlName="overview"
+            style="height: 20rem"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Imagen</label>
+          <input
+            type="text"
+            class="form-control"
+            name="imageUrl"
+            formControlName="imageUrl"
+          />
+          <br />
+          <div *ngIf="editForm.controls.imageUrl.value">
+            <img
+              [src]="editForm.controls.imageUrl.value"
+              alt="Movie"
+              style="height: 20rem; width: 15rem"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="popularity">Popularidad</label>
+          <input
+            type="text"
+            class="form-control"
+            name="popularity"
+            formControlName="popularity"
+          />
+        </div>
+        <div class="form-group">
+          <label for="duration">Duración</label>
+          <input
+            type="text"
+            class="form-control"
+            name="duration"
+            formControlName="duration"
+          />
+        </div>
+        <div class="form-group">
+            <button
+              class="btn btn-success btn-block"
+              [disabled]="!editForm.valid"
+            >
+              Editar
+            </button>
+          </div>
+      </div>
+    </div>
+    <div class="mt-4" *ngIf="!movie">Cargando...</div>
+  </form>
+  <div *ngFor="let validation of validationMessages.title">
+    <div
+      *ngIf="
+        editForm.controls['title'].invalid &&
+        (editForm.controls['title'].dirty || editForm.controls['title'].touched)
+      "
+    >
+      <div
+        *ngIf="
+          editForm.controls['title'].errors &&
+          editForm.controls['title'].hasError(validation.type)
+        "
+      >
+        <div class="alert alert-danger">{{ validation.message }}</div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.overview">
+      <div
+        *ngIf="
+          editForm.controls['overview'].invalid &&
+          (editForm.controls['overview'].dirty ||
+            editForm.controls['overview'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            editForm.controls['overview'].errors &&
+            editForm.controls['overview'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+      <div *ngFor="let validation of validationMessages.imageUrl">
+        <div
+          *ngIf="
+            editForm.controls['imageUrl'].invalid &&
+            (editForm.controls['imageUrl'].dirty ||
+              editForm.controls['imageUrl'].touched)
+          "
+        >
+          <div
+            *ngIf="
+              editForm.controls['imageUrl'].errors &&
+              editForm.controls['imageUrl'].hasError(validation.type)
+            "
+          >
+            <div class="alert alert-danger">{{ validation.message }}</div>
+          </div>
+        </div>
+        <div *ngFor="let validation of validationMessages.popularity">
+          <div
+            *ngIf="
+              editForm.controls['popularity'].invalid &&
+              (editForm.controls['popularity'].dirty ||
+                editForm.controls['popularity'].touched)
+            "
+          >
+            <div
+              *ngIf="
+                editForm.controls['popularity'].errors &&
+                editForm.controls['popularity'].hasError(validation.type)
+              "
+            >
+              <div class="alert alert-danger">{{ validation.message }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let validation of validationMessages.duration">
+          <div
+            *ngIf="
+              editForm.controls['duration'].invalid &&
+              (editForm.controls['duration'].dirty ||
+                editForm.controls['duration'].touched)
+            "
+          >
+            <div
+              *ngIf="
+                editForm.controls['duration'].errors &&
+                editForm.controls['duration'].hasError(validation.type)
+              "
+            >
+              <div class="alert alert-danger">{{ validation.message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalRegister let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">WikiMovies</h4>
+    </div>
+    <div class="modal-body">
+      <p><strong>😁 Felicitaciones!</strong></p>
+      <p>La pelicula se actualizó satisfactoriamente.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="modal.close()">Aceptar</button>
+    </div>
+  </ng-template>
+  

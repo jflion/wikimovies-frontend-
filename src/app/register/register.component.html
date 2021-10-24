@@ -1,0 +1,173 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <h3>Nuevo Usuario</h3>
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="handleSubmit(registerForm.value)"
+    >
+      <div class="form-group">
+        <label for="firstName">Nombres</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          formControlName="firstName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="lastName">Apellidos</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          formControlName="lastName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Electronico</label>
+        <input
+          type="text"
+          class="form-control"
+          name="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          
+        />
+      </div>
+      <div class="form-group">
+        <button
+          class="btn btn-success btn-block"
+          [disabled]="!registerForm.valid"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+    <div class="form-group">
+      <a class="btn btn-block" routerLink="/login"> Regresar </a>
+    </div>
+    <div *ngFor="let validation of validationMessages.firstName">
+      <div
+        *ngIf="
+          registerForm.controls['firstName'].invalid &&
+          (registerForm.controls['firstName'].dirty ||
+            registerForm.controls['firstName'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            registerForm.controls['firstName'].errors &&
+            registerForm.controls['firstName'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.lastName">
+      <div
+        *ngIf="
+          registerForm.controls['lastName'].invalid &&
+          (registerForm.controls['lastName'].dirty ||
+            registerForm.controls['lastName'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            registerForm.controls['lastName'].errors &&
+            registerForm.controls['lastName'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.email">
+      <div
+        *ngIf="
+          registerForm.controls['email'].invalid &&
+          (registerForm.controls['email'].dirty ||
+            registerForm.controls['email'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            registerForm.controls['email'].errors &&
+            registerForm.controls['email'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.password">
+      <div
+        *ngIf="
+          registerForm.controls['password'].invalid &&
+          (registerForm.controls['password'].dirty ||
+            registerForm.controls['password'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            registerForm.controls['password'].errors &&
+            registerForm.controls['password'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let validation of validationMessages.confirmPassword">
+      <div
+        *ngIf="
+          registerForm.controls['confirmPassword'].invalid &&
+          (registerForm.controls['confirmPassword'].dirty ||
+            registerForm.controls['confirmPassword'].touched)
+        "
+      >
+        <div
+          *ngIf="
+            registerForm.controls['confirmPassword'].errors &&
+            registerForm.controls['confirmPassword'].hasError(validation.type)
+          "
+        >
+          <div class="alert alert-danger">{{ validation.message }}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="registerForm.hasError('equal')">
+      <div class="alert alert-danger">La contraseña y la confirmación deben ser iguales</div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalRegister let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">WikiMovies</h4>
+  </div>
+  <div class="modal-body">
+    <p><strong>😁 Felicitaciones!</strong></p>
+    <p>El usuario se registró satisfactoriamente.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" (click)="modal.close()">Aceptar</button>
+  </div>
+</ng-template>
